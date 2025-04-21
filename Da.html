@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis and Results</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #6495ed;
+        }
+        .navigation {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #e6f7ff;
+            border-radius: 5px;
+        }
+        .navigation a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        .analysis-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #add8e6;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .code-block {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .result {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="Main.html" target="_self">Home</a>
+        <a href="Vis.html" target="_self">Visualizations</a>
+        <a href="Da.html" target="_self">Data Analysis & Results</a>
+    </div>
+
+    <h1>Data Analysis and Regression Model Results</h1>
+
+    <p>This section details the data exploration and the attempt to apply a regression model to the palliative care national rates data.</p>
+
+    <div class="analysis-section">
+        <h2>Data Loading and Exploration</h2>
+        <p>The 'PCH_Palliative_Care_NATIONAL.csv' dataset was loaded using the Pandas library. Initial exploration using <code>df.info()</code> revealed the structure of the data, including the data types of the columns. The <code>df.describe()</code> method provided descriptive statistics for the numerical 'National Rate' column.</p>
+    </div>
+
+    <div class="analysis-section">
+        <h2>Data Preparation for Regression</h2>
+        <p>To attempt a regression model, the categorical 'Measure ID' column was encoded into a numerical representation using Label Encoding from scikit-learn. This allowed us to use it as a feature (X) to predict the 'National Rate' (y). It's important to note that predicting a national rate based solely on the identifier of the measure is not a typical or inherently meaningful regression task, as there's no direct numerical relationship expected.</p>
+        <div class="code-block">
+            <pre>
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import pandas as pd
+
+# Assuming df is your loaded DataFrame
+label_encoder = LabelEncoder()
+df['Measure_ID_Encoded'] = label_encoder.fit_transform(df['Measure ID'])
+
+X = df[['Measure_ID_Encoded']]
+y = df['National Rate']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+            </pre>
+        </div>
+    </div>
+
+    <div class="analysis-section">
+        <h2>Regression Model and Training</h2>
+        <p>A Linear Regression model from scikit-learn was used for this attempt. The model was trained on the training data (X_train and y_train).</p>
+        <div class="code-block">
+            <pre>
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+            </pre>
+        </div>
+    </div>
+
+    <div class="analysis-section">
+        <h2>Model Evaluation</h2>
+        <p>The performance of the model was evaluated using Mean Squared Error (MSE) and R-squared on the test data.</p>
+        <div class="code-block">
+            <pre>
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Squared Error: {mse:.2f}")
+print(f"R-squared: {r2:.2f}")
+            </pre>
+        </div>
+        <p>The Mean Squared Error and R-squared values obtained here should be interpreted with caution due to the nature of trying to predict a national rate based on a categorical identifier. These metrics might not reflect a meaningful predictive relationship in this context.</p>
+    </div>
+
+    <div class="analysis-section">
+        <h2>Conclusion</h2>
+        <p>The analysis of the 'PCH_Palliative_Care_NATIONAL.csv' dataset provided insights into the national rates for various palliative care measures. While an attempt was made to apply a regression model by encoding the 'Measure ID', it's important to recognize that this is not a standard predictive modeling scenario for this type of data. The national rate is more likely influenced by complex factors not directly captured by the measure's identifier. Further analysis could focus on exploring trends in these national rates over time if more historical data were available.</p>
+    </div>
+
+</body>
+</html>

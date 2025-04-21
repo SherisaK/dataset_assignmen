@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizations</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #28a745;
+        }
+        .navigation {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+        }
+        .navigation a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #198754;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        .visualization {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .visualization img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        .caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="Main.html" target="_self">Home</a>
+        <a href="Vis.html" target="_self">Visualizations</a>
+        <a href="Da.html" target="_self">Data Analysis & Results</a>
+    </div>
+
+    <h1>Visualizations of Palliative Care National Rates</h1>
+
+    <p>This section displays visualizations created to understand the national rates for different palliative care measures.</p>
+
+    <div class="visualization">
+        <h2>National Rates by Measure</h2>
+        <img src="nationalrates_barplot.png" alt="Bar Plot of National Rates by Measure">
+        <p class="caption">This bar plot shows the national rate for each reported palliative care measure. The x-axis represents the Measure ID, and the y-axis represents the National Rate.</p>
+    </div>
+
+    <div class="visualization">
+        <h2>Distribution of National Rates</h2>
+        <img src="nationalrates_distribution.png" alt="Distribution of National Rates">
+        <p class="caption">This histogram illustrates the distribution of the national rates across all the reported palliative care measures. It shows the frequency of different rate values.</p>
+    </div>
+
+    <div class="visualization">
+        <h2>Box Plot of National Rates</h2>
+        <img src="nationalrates_boxplot.png" alt="Box Plot of National Rates">
+        <p class="caption">This box plot provides a summary of the distribution of national rates, showing the median, quartiles, and potential outliers.</p>
+    </div>
+
+</body>
+</html>
